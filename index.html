@@ -20,23 +20,15 @@
     <div class="item">
         <ion-icon name="arrow-back" onclick="sideMenu()"></ion-icon> <h2>Fechar</h2>
     </div>
-    <h1>Escolha um contato para enviar a mensgem:</h1>
-        <div class="item">
-            <ion-icon name="people"></ion-icon> <h2>Todos</h2>
-            </div>
-            <div class="item">
-            <ion-icon name="person-circle"></ion-icon> <h2>Usuário 1</h2>
-            </div>
-            <div class="item">
-            <ion-icon name="person-circle"></ion-icon> <h2>Usuário 2</h2><ion-icon name="checkmark-sharp"></ion-icon>
-            </div>
+    <h1>Escolha um contato para enviar a mensagem:</h1>
+    <div class="users-list"></div> 
     <h1>Escolha a visibilidade:</h1>
-        <div class="item">
-            <ion-icon name="lock-open"></ion-icon><h2>Público</h2>
-            </div>
-        <div class="item">
-            <ion-icon name="lock-closed"></ion-icon><h2>Reservadamente</h2><ion-icon name="checkmark-sharp"></ion-icon>
-        </div>
+    <div class="item" onclick="selectMessageType('message', this)">
+        <ion-icon name="lock-open"></ion-icon><h2>Público</h2>
+    </div>
+    <div class="item" onclick="selectMessageType('private_message', this)">
+        <ion-icon name="lock-closed"></ion-icon><h2>Reservadamente</h2><ion-icon name="checkmark-sharp"></ion-icon>
+    </div>
 </div>
 <footer>
      <div class="msgContainer">
