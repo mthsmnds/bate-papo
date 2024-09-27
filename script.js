@@ -59,9 +59,17 @@ function renderParticipants(response){
 function selectUser(userName, element){
         selectedUser = userName;
         const usersList = document.querySelectorAll(".sidebar .users-list .item");
-        usersList.forEach(item => item.classList.remove("selected"));
+        usersList.forEach(item => {
+            item.classList.remove("selected");
+            const checkmark = item.querySelector("ion-icon[name='checkmark-sharp']");
+            if (checkmark) {
+                checkmark.remove(); 
+            }
+        });
+        
         element.classList.add("selected");
     
+        element.innerHTML += `<ion-icon name="checkmark-sharp"></ion-icon>`;
         updateMsgStatus();
 }
 
@@ -77,41 +85,41 @@ function processMsgs(serverResponse){
         renderMsgs();
 }
 
- function renderMsgs(){
-         const ul = document.querySelector(".messages");
-         ul.innerHTML = "";
-
-                 for (let i=0; i < sentMessages.length; i++){
-                        if(sentMessages[i].type === "status"){
-                                ul.innerHTML += 
-                                        `<li class="msg ${sentMessages[i].type}">
-                                                 <p>(${sentMessages[i].time})</p>
-                                                 <div>
-                                                 <strong>${sentMessages[i].from}</strong> 
-                                                ${sentMessages[i].text} 
-                                                </div>
-                                         </li>
-                                        `;
-                        }
-                        else{
-                         ul.innerHTML += `
-                         <li class="msg ${sentMessages[i].type}">
-                                 <p>(${sentMessages[i].time})</p>
-                                 <div>
-                                 <strong>${sentMessages[i].from}</strong> 
-                                para
-                                <strong>${sentMessages[i].to}</strong>:
-                                ${sentMessages[i].text} 
-                                </div>
-                         </li>
-                        `;
-                 }
-                }
-
-                const lastMsg = ul.querySelector("li : last-child");
-                lastMsg.scrollIntoView();
-        
-}
+function renderMsgs() {
+        const ul = document.querySelector(".messages");
+        ul.innerHTML = "";
+    
+        for (let i = 0; i < sentMessages.length; i++) {
+            const msg = sentMessages[i];
+    
+            if (msg.type === "status") {
+                ul.innerHTML += `
+                    <li class="msg ${msg.type}">
+                        <p>(${msg.time})</p>
+                        <div>
+                            <strong>${msg.from}</strong> 
+                            ${msg.text} 
+                        </div>
+                    </li>
+                `;
+            }
+            else if (msg.type === "message" || (msg.type === "private_message" && (msg.from === userName || msg.to === userName))) {
+                ul.innerHTML += `
+                    <li class="msg ${msg.type}">
+                        <p>(${msg.time})</p>
+                        <div>
+                            <strong>${msg.from}</strong> 
+                            para
+                            <strong>${msg.to}</strong>:
+                            ${msg.text} 
+                        </div>
+                    </li>
+                `;
+            }
+        }
+    
+        scrollToLastMsg();
+    }
 
 function sendMsg(){
 
@@ -126,27 +134,19 @@ function sendMsg(){
 
 function selectMsgType(type, element){
         messageType = type
-        const usersList = document.querySelectorAll(".sidebar .item");
-        usersList.forEach(item => item.classListe.remove("selected"));
+        const messageTypes = document.querySelectorAll(".sidebar .item");
+        messageTypes.forEach(item => {
+                item.classList.remove("selected");
+                const checkmark = item.querySelector("ion-icon[name='checkmark-sharp']");
+                if (checkmark) {
+                    checkmark.remove();
+                }
+            });
+
         element.classList.add("selected");
+        element.innerHTML += `<ion-icon name= "checkmark-sharp"></ion-icon>`;
 
-        if(type === 'private_message'){
-                toggleMsgType(true);
-        }else{
-                toggleMsgType(false);
-        }
-
-}
-
-function toggleMsgType(isPrivate){
-        if (isPrivate){
-                messageType = "private_message";
-                document.querySelector(".msgStatus").innerHTML = `Enviando mensagem para ${selectedUser} (Reservadamente)`
-        }else{
-                messageType = "message";
-                document.querySelector(".msgStatus").innerHTML = `Enviando mensagem para ${selectedUser} (Público)`
-        }
-
+        updateMsgStatus();
 }
 
 function updateMsgStatus() {
@@ -157,6 +157,21 @@ function updateMsgStatus() {
             msgStatus.innerHTML = `Enviando mensagem para ${selectedUser} (Público)`;
         }
     }
+
+function scrollToLastMsg() {
+        const ul = document.querySelector(".messages");
+        const lastMsg = ul.querySelector("li:last-child");
+        if (lastMsg) {
+            lastMsg.scrollIntoView();
+        }
+    }
+
+function checkOnline(){
+        let isOnline = axios.get("https:mock-api.driven.com.br/api/v6/uol/participants/9860ca18-f538-4fd4-8a99-80eacf4f078f");
+        if(userName != isOnline){
+                userLogin();
+        }
+}
 
 function receiveMsg(){
         console.log("Resposta recebida");
