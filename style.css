@@ -1,0 +1,149 @@
+body{
+        font-family: Arial, Helvetica, sans-serif;
+        background-color: #f3f3f3;
+}
+
+strong{
+        font-weight: 600;
+}
+
+p{
+        margin-right: 15px;
+        font-weight: 300;
+        color: #8a8a8a;
+}
+
+
+header{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 50px;
+        width: 100vw;
+        padding: 10px;
+        background-color: white;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+header img{
+        width: 70px;
+        margin-left: 10px;
+}
+header ion-icon{
+        margin-right: 45px;
+        font-size: 30px;
+}
+
+main{
+        margin-top: 85px;
+        margin-bottom: 85px;
+}
+
+.sidebar{
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        position: fixed;
+        top: 0;
+        right: 0;
+        height: 100vw;
+        width: 25vw;
+        padding: 10px;
+        background-color: white;
+        box-shadow: 0 0 1000px rgba(0, 0, 0, 0.75);
+        z-index: 2;
+}
+
+.sidebar h1{
+        font-weight: 600;
+        font-size: large;
+        margin-bottom: 10px;
+        margin-top: 20px;
+}
+
+.sidebar h2{
+        font-size: medium;
+        margin-left: 5px;
+        padding-top: 7px;
+        margin-right: 35px;
+}
+
+.sidebar ion-icon{
+        font-size: 30px;
+}
+
+.hidden{
+        display: none;
+}
+
+.item{
+        display: flex;
+        margin-top: 10px;
+}
+
+.msg{
+        display: flex;
+        padding: 10px;
+        margin: 5px;
+        max-width: 100vw ;
+}
+
+.status{
+        background-color: #dcdcdc;
+}
+
+.message{
+        background-color: #FFFFFF;
+}
+
+.private_message{
+        background-color: #FFDEDE;
+}
+
+footer{
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        height: 50px;
+        width: 99vw;
+        padding: 10px;
+        background-color: white;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.msgContainer {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+}
+
+.msgContainer textarea{
+                padding: 8px;
+                border: 1px solid #FFFFFF;
+                border-radius: 5px;
+                margin-bottom: 2px;
+                font-size: 18px;
+                width: 80vw;
+}
+
+.msgContainer ::placeholder{
+        font-weight: 800;
+        font-style: italic;
+        color: black;
+}
+
+.msgContainer ion-icon{
+        margin-right: 20px;
+        font-size: 30px;
+        margin-left: 10px;
+}
+
+.msgStatus{
+        font-size: 14px;
+        color: grey;
+}
+
+
